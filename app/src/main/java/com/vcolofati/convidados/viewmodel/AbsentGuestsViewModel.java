@@ -1,16 +1,16 @@
-package com.vcolofati.convidados.ui.present;
+package com.vcolofati.convidados.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class PresentGuestsViewModel extends ViewModel {
+public class AbsentGuestsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public PresentGuestsViewModel() {
+    public AbsentGuestsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Present guests fragment");
+        mText.setValue("Absent Guests Fragment");
     }
 
     public LiveData<String> getText() {

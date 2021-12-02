@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Convidados</string>
+    <string name="navigation_drawer_open">Abre o menu de navegação</string>
+    <string name="navigation_drawer_close">Fecha o menu de navegação</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Cebeçalho da Navegação</string>
+
+    <string name="menu_all_guests">Todos Convidados</string>
+    <string name="menu_present_guests">Convidados Presentes</string>
+    <string name="menu_absent_guests">Convidados Ausentes</string>
+
+    <string name="form_name">Nome</string>
+    <string name="text_form_confirmation">Confirmação</string>
+    <string name="form_radio_maybe">Não confirmado</string>
+    <string name="form_radio_present">Presente</string>
+    <string name="form_radio_absent">Ausente</string>
+    <string name="form_save">Salvar</string>
+
+
+</resources>

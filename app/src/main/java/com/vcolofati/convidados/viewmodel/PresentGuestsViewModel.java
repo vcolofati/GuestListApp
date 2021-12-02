@@ -1,16 +1,16 @@
-package com.vcolofati.convidados.ui.all;
+package com.vcolofati.convidados.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class AllGuestsViewModel extends ViewModel {
+public class PresentGuestsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public AllGuestsViewModel() {
+    public PresentGuestsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("All guests fragment");
+        mText.setValue("Present guests fragment");
     }
 
     public LiveData<String> getText() {

@@ -1,4 +1,4 @@
-package com.vcolofati.convidados.ui.all;
+package com.vcolofati.convidados.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.vcolofati.convidados.databinding.FragmentAllGuestsBinding;
+import com.vcolofati.convidados.viewmodel.AllGuestsViewModel;
 
 public class AllGuestsFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package com.vcolofati.convidados.ui.present;
+package com.vcolofati.convidados.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,23 +12,24 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.vcolofati.convidados.databinding.FragmentPresentGuestsBinding;
+import com.vcolofati.convidados.databinding.FragmentAbsentGuestsBinding;
+import com.vcolofati.convidados.viewmodel.AbsentGuestsViewModel;
 
-public class PresentGuestsFragment extends Fragment {
+public class AbsentGuestsFragment extends Fragment {
 
-    private PresentGuestsViewModel presentGuestsViewModel;
-    private FragmentPresentGuestsBinding binding;
+    private AbsentGuestsViewModel absentGuestsViewModel;
+    private FragmentAbsentGuestsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        presentGuestsViewModel =
-                new ViewModelProvider(this).get(PresentGuestsViewModel.class);
+        absentGuestsViewModel =
+                new ViewModelProvider(this).get(AbsentGuestsViewModel.class);
 
-        binding = FragmentPresentGuestsBinding.inflate(inflater, container, false);
+        binding = FragmentAbsentGuestsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textGallery;
-        presentGuestsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textSlideshow;
+        absentGuestsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
