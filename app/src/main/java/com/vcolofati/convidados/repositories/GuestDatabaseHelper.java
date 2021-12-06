@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.vcolofati.convidados.constants.DatabaseConstants;
+import com.vcolofati.convidados.constants.Constants;
 
 public class GuestDatabaseHelper extends SQLiteOpenHelper {
 
@@ -15,13 +15,13 @@ public class GuestDatabaseHelper extends SQLiteOpenHelper {
 
     private static final StringBuilder CREATE_TABLE_GUEST = new StringBuilder()
             .append("create table ")
-            .append(DatabaseConstants.GUEST.TABLE_NAME)
+            .append(Constants.GUEST.TABLE_NAME)
             .append(" (")
-            .append(DatabaseConstants.GUEST.COLUMNS.ID)
+            .append(Constants.GUEST.COLUMNS.ID)
             .append(" integer primary key autoincrement, ")
-            .append(DatabaseConstants.GUEST.COLUMNS.NAME)
+            .append(Constants.GUEST.COLUMNS.NAME)
             .append(" text, ")
-            .append(DatabaseConstants.GUEST.COLUMNS.PRESENCE)
+            .append(Constants.GUEST.COLUMNS.PRESENCE)
             .append(" text);");
 
     public GuestDatabaseHelper(@Nullable Context context) {

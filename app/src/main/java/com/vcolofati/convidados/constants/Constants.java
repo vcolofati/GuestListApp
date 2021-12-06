@@ -1,8 +1,10 @@
 package com.vcolofati.convidados.constants;
 
-public class DatabaseConstants {
+public class Constants {
 
-    private DatabaseConstants() {}
+    private Constants() {}
+
+    public static String GUESTID = "guestId";
 
     public static class GUEST {
         public static final String TABLE_NAME = "Guest";
