@@ -4,7 +4,9 @@ public class Constants {
 
     private Constants() {}
 
-    public static String GUESTID = "guestId";
+    public static final String GUESTID = "guestId";
+
+    public static final String FILTER = "FILTER";
 
     public static class GUEST {
         public static final String TABLE_NAME = "Guest";

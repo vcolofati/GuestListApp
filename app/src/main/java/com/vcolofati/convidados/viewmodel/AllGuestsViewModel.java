@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.vcolofati.convidados.enums.GuestFormEnum;
 import com.vcolofati.convidados.models.Guest;
 import com.vcolofati.convidados.repositories.GuestRepository;
 
@@ -14,9 +15,9 @@ import java.util.List;
 
 public class AllGuestsViewModel extends AndroidViewModel {
 
-    private GuestRepository mRepository;
+    private final GuestRepository mRepository;
 
-    private MutableLiveData<List<Guest>> mGuestLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<Guest>> mGuestLiveData = new MutableLiveData<>();
     public LiveData<List<Guest>> guestLiveData = this.mGuestLiveData;
 
     public AllGuestsViewModel(@NonNull Application application) {
@@ -25,7 +26,17 @@ public class AllGuestsViewModel extends AndroidViewModel {
     }
 
 
-    public void getList() {
-        this.mGuestLiveData.setValue(this.mRepository.getGuestList());
+    public void getList(int mFilter) {
+        if (mFilter == GuestFormEnum.NOT_CONFIRMED.ordinal()) {
+            this.mGuestLiveData.setValue(this.mRepository.getAllGuestList());
+        } else if (mFilter == GuestFormEnum.PRESENT.ordinal()) {
+            this.mGuestLiveData.setValue(this.mRepository.getPresentGuestList());
+        } else if (mFilter == GuestFormEnum.ABSENT.ordinal()) {
+            this.mGuestLiveData.setValue(this.mRepository.getAbsentGuestList());
+        }
+    }
+
+    public void delete(int id) {
+        this.mRepository.delete(id);
     }
 }

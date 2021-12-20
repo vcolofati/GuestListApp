@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,19 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vcolofati.convidados.R;
 import com.vcolofati.convidados.constants.Constants;
 import com.vcolofati.convidados.databinding.FragmentAllGuestsBinding;
-import com.vcolofati.convidados.models.Guest;
 import com.vcolofati.convidados.view.adapters.AllGuestAdapter;
 import com.vcolofati.convidados.view.listeners.OnListClick;
 import com.vcolofati.convidados.viewmodel.AllGuestsViewModel;
-
-import java.util.List;
 
 public class AllGuestsFragment extends Fragment {
 
     private AllGuestsViewModel mViewModel;
     private final ViewHolder mViewHolder = new ViewHolder();
     private FragmentAllGuestsBinding binding;
-    private AllGuestAdapter mAdapter = new AllGuestAdapter();
+    private final AllGuestAdapter mAdapter = new AllGuestAdapter();
+    private int mFilter = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,15 +39,28 @@ public class AllGuestsFragment extends Fragment {
         this.mViewHolder.recyclerGuests.setLayoutManager(new LinearLayoutManager(getContext()));
         this.mViewHolder.recyclerGuests.setAdapter(this.mAdapter);
 
-        OnListClick listener = id -> {
-            Bundle bundle = new Bundle();
-            bundle.putInt(Constants.GUESTID, id);
-            Intent intent = new Intent(getContext(), GuestFormActivity.class);
-            intent.putExtras(bundle);
-            startActivity(intent);
+        OnListClick listener = new OnListClick() {
+            @Override
+            public void onClick(int id) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constants.GUESTID, id);
+                Intent intent = new Intent(getContext(), GuestFormActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(int id) {
+                mViewModel.delete(id);
+                mViewModel.getList(mFilter);
+            }
         };
 
         this.mAdapter.attachListener(listener);
+
+        if (getArguments() != null) {
+            this.mFilter = getArguments().getInt(Constants.FILTER);
+        }
 
         this.observers();
         return root;
@@ -59,11 +69,11 @@ public class AllGuestsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        this.mViewModel.getList();
+        this.mViewModel.getList(mFilter);
     }
 
     private void observers() {
-        this.mViewModel.guestLiveData.observe(getViewLifecycleOwner(), guests -> mAdapter.attachList(guests));
+        this.mViewModel.guestLiveData.observe(getViewLifecycleOwner(), mAdapter::attachList);
     }
 
     private static class ViewHolder {

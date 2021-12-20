@@ -2,7 +2,6 @@ package com.vcolofati.convidados.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -29,12 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), GuestFormActivity.class));
-            }
-        });
+        binding.appBarMain.fab.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), GuestFormActivity.class)));
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each

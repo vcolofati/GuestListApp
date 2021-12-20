@@ -1,7 +1,6 @@
 package com.vcolofati.convidados.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -18,8 +17,9 @@ import com.vcolofati.convidados.viewmodel.GuestFormViewModel;
 
 public class GuestFormActivity extends AppCompatActivity {
 
-    private ViewHolder mViewHolder = new ViewHolder();
+    private final ViewHolder mViewHolder = new ViewHolder();
     private GuestFormViewModel mViewModel;
+    private int mGuestId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +37,8 @@ public class GuestFormActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            int id = bundle.getInt(Constants.GUESTID);
-            this.mViewModel.getGuest(id);
+            this.mGuestId = bundle.getInt(Constants.GUESTID);
+            this.mViewModel.getGuest(this.mGuestId);
         }
     }
 
@@ -55,10 +55,10 @@ public class GuestFormActivity extends AppCompatActivity {
 
     private void handleSave() {
         String name = this.mViewHolder.editName.getText().toString();
-        RadioButton rb = findViewById(this.mViewHolder.radioGroup.getCheckedRadioButtonId());
-        //trabalhando para conseguir obter o enum de acordo com a localização
-        GuestFormEnum confirmation = GuestFormEnum.get("Not Confirmed");
-        this.mViewModel.save(new Guest(name, confirmation));
+        int index = this.mViewHolder.radioGroup
+                .indexOfChild(findViewById(this.mViewHolder.radioGroup.getCheckedRadioButtonId()));
+        GuestFormEnum confirmation = GuestFormEnum.get(index);
+        this.mViewModel.save(new Guest(this.mGuestId, name, confirmation));
     }
 
     private static class ViewHolder {

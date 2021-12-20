@@ -5,25 +5,24 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public enum GuestFormEnum {
-    NOT_CONFIRMED("Not Confirmed", "Não confirmado"), PRESENT("Present", "Presente"), ABSENT("Absent", "Ausente");
+    NOT_CONFIRMED(0), PRESENT(1), ABSENT(2);
 
-    private final String localeUS, localeBR;
-    private static final Map<String, GuestFormEnum> ENUM_MAP;
+    private final int id;
+    private static final Map<Integer, GuestFormEnum> ENUM_MAP;
 
-    GuestFormEnum(String localeUS, String localeBR) {
-        this.localeUS = localeUS;
-        this.localeBR = localeBR;
+    GuestFormEnum(int id) {
+        this.id = id;
     }
 
     static {
-        Map<String,GuestFormEnum> map = new ConcurrentHashMap<>();
+        Map<Integer,GuestFormEnum> map = new ConcurrentHashMap<>();
         for (GuestFormEnum instance : GuestFormEnum.values()) {
-            map.put(instance.localeUS.toLowerCase(),instance);
+            map.put(instance.id,instance);
         }
         ENUM_MAP = Collections.unmodifiableMap(map);
     }
 
-    public static GuestFormEnum get (String name) {
-        return ENUM_MAP.get(name.toLowerCase());
+    public static GuestFormEnum get (int id) {
+        return ENUM_MAP.get(id);
     }
 }

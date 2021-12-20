@@ -18,5 +18,8 @@
     <string name="form_radio_absent">Ausente</string>
     <string name="form_save">Salvar</string>
 
-
+    <string name="delete_dialog_title">Remoção de convidado</string>
+    <string name="delete_dialog_message">Tem certeza que deseja remover esse convidado?</string>
+    <string name="delete_dialog_positive">Sim</string>
+    <string name="delete_dialog_negative">Não</string>
 </resources>
