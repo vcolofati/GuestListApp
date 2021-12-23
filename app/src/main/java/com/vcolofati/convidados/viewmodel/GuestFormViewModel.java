@@ -20,7 +20,7 @@ public class GuestFormViewModel extends AndroidViewModel {
 
     public GuestFormViewModel(@NonNull Application application) {
         super(application);
-        this.repository = GuestRepository.getInstance(application.getApplicationContext());
+        this.repository = new GuestRepository(application.getApplicationContext());
     }
 
     public void save(Guest guest) {

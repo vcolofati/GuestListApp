@@ -49,11 +49,8 @@ public class GuestFormActivity extends AppCompatActivity {
                 case SUCCESS:
                     if (guestResource.data != null) {
                         mViewHolder.editName.setText(guestResource.data.getName());
-                        ((RadioButton) mViewHolder.radioGroup.getChildAt(guestResource
-                                .data
-                                .getConfirmation()
-                                .ordinal()))
-                                .setChecked(true);
+                        int childIndex = GuestFormEnum.valueOf(guestResource.data.getConfirmation()).ordinal();
+                        ((RadioButton) mViewHolder.radioGroup.getChildAt(childIndex)).setChecked(true);
                     }
                     if (guestResource.message != null) {
                         Toast.makeText(getApplicationContext(), guestResource.message, Toast.LENGTH_SHORT).show();
