@@ -31,10 +31,10 @@ public class GuestFormViewModel extends AndroidViewModel {
 
             if (guest.getId() == 0) {
                 this.repository.insert(guest);
-                this.mResourceGuest.postValue(Resource.success(null, "Insert success"));
+                this.mResourceGuest.postValue(Resource.success(guest, "Insert success"));
             } else {
                 this.repository.update(guest);
-                this.mResourceGuest.postValue(Resource.success(null, "Update success"));
+                this.mResourceGuest.postValue(Resource.success(guest, "Update success"));
             }
         } catch (DatabaseException.InsertException insertException) {
             this.mResourceGuest.postValue(Resource.error("Insert Error", null));
@@ -49,6 +49,5 @@ public class GuestFormViewModel extends AndroidViewModel {
         } catch (Exception e) {
             this.mResourceGuest.postValue(Resource.error(e.getMessage(), null));
         }
-
     }
 }

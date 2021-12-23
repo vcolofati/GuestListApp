@@ -47,14 +47,17 @@ public class GuestFormActivity extends AppCompatActivity {
         this.mViewModel.resourceGuest.observe(this, guestResource -> {
             switch (guestResource.status) {
                 case SUCCESS:
-                    assert guestResource.data != null;
-                    mViewHolder.editName.setText(guestResource.data.getName());
-                    ((RadioButton) mViewHolder.radioGroup.getChildAt(guestResource
-                            .data
-                            .getConfirmation()
-                            .ordinal()))
-                            .setChecked(true);
-                    Toast.makeText(getApplicationContext(), guestResource.message, Toast.LENGTH_SHORT).show();
+                    if (guestResource.data != null) {
+                        mViewHolder.editName.setText(guestResource.data.getName());
+                        ((RadioButton) mViewHolder.radioGroup.getChildAt(guestResource
+                                .data
+                                .getConfirmation()
+                                .ordinal()))
+                                .setChecked(true);
+                    }
+                    if (guestResource.message != null) {
+                        Toast.makeText(getApplicationContext(), guestResource.message, Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case ERROR:
                     Toast.makeText(getApplicationContext(), "Error loading guest",
