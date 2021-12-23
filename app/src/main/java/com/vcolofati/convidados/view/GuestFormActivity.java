@@ -1,13 +1,14 @@
 package com.vcolofati.convidados.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.vcolofati.convidados.R;
 import com.vcolofati.convidados.constants.Constants;
@@ -43,9 +44,23 @@ public class GuestFormActivity extends AppCompatActivity {
     }
 
     private void setObservers() {
-        this.mViewModel.guest.observe(this, guest -> {
-            mViewHolder.editName.setText(guest.getName());
-            ((RadioButton) mViewHolder.radioGroup.getChildAt(guest.getConfirmation().ordinal())).setChecked(true);
+        this.mViewModel.resourceGuest.observe(this, guestResource -> {
+            switch (guestResource.status) {
+                case SUCCESS:
+                    assert guestResource.data != null;
+                    mViewHolder.editName.setText(guestResource.data.getName());
+                    ((RadioButton) mViewHolder.radioGroup.getChildAt(guestResource
+                            .data
+                            .getConfirmation()
+                            .ordinal()))
+                            .setChecked(true);
+                    Toast.makeText(getApplicationContext(), guestResource.message, Toast.LENGTH_SHORT).show();
+                    break;
+                case ERROR:
+                    Toast.makeText(getApplicationContext(), "Error loading guest",
+                            Toast.LENGTH_SHORT).show();
+                    break;
+            }
         });
     }
 
@@ -58,7 +73,9 @@ public class GuestFormActivity extends AppCompatActivity {
         int index = this.mViewHolder.radioGroup
                 .indexOfChild(findViewById(this.mViewHolder.radioGroup.getCheckedRadioButtonId()));
         GuestFormEnum confirmation = GuestFormEnum.get(index);
+
         this.mViewModel.save(new Guest(this.mGuestId, name, confirmation));
+        finish();
     }
 
     private static class ViewHolder {

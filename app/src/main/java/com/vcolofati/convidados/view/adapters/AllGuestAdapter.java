@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vcolofati.convidados.R;
+import com.vcolofati.convidados.errorHandling.Resource;
 import com.vcolofati.convidados.models.Guest;
 import com.vcolofati.convidados.view.listeners.OnListClick;
 import com.vcolofati.convidados.view.viewholder.AllGuestsViewHolder;
@@ -38,8 +39,8 @@ public class AllGuestAdapter extends RecyclerView.Adapter<AllGuestsViewHolder> {
         return this.mList.size();
     }
 
-    public void attachList(List<Guest> list) {
-        this.mList = list;
+    public void attachList(Resource<List<Guest>> resource) {
+        this.mList = resource.data;
         notifyDataSetChanged();
     }
 

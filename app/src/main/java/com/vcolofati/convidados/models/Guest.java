@@ -7,11 +7,6 @@ public class Guest {
     private String name;
     private GuestFormEnum confirmation;
 
-    public Guest(String name, GuestFormEnum confirmation) {
-        this.name = name;
-        this.confirmation = confirmation;
-    }
-
     public Guest(int id, String name, GuestFormEnum confirmation) {
         this.id = id;
         this.name = name;

@@ -73,7 +73,7 @@ public class AllGuestsFragment extends Fragment {
     }
 
     private void observers() {
-        this.mViewModel.guestLiveData.observe(getViewLifecycleOwner(), mAdapter::attachList);
+        this.mViewModel.ResourceGuestListData.observe(getViewLifecycleOwner(), mAdapter::attachList);
     }
 
     private static class ViewHolder {
